@@ -9,7 +9,10 @@ public class RuntimeUtils {
     private static final Runnable sUIUpdateClosure = new Runnable() {
         @Override
         public void run() {
-            ReactContextHolder.getContext().getNativeModule(UIManagerModule.class).onBatchComplete();
+            var nativeModule = ReactContextHolder.getContext().getNativeModule(UIManagerModule.class);
+            if (nativeModule != null) {
+                nativeModule.onBatchComplete();
+            }
         }
     };
 
